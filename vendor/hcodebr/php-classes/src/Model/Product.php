@@ -20,6 +20,20 @@ class Product  extends Model
 
 	}
 
+	public static function checkList($list)
+	{
+
+		foreach ($list as &$row) {
+			$p = new Product();
+			$p->setData($row);
+			$row = $p->getValues();
+		}
+
+		return $list;
+
+	}
+
+
 	public function save()
 	{
 
@@ -76,7 +90,7 @@ class Product  extends Model
 			$this->getidproduct() . ".jpg"
 			)) {
 
-			$url =  "/res/site/img/products" . $this->getidproduct() . ".jpg";
+			$url =  "/res/site/img/products/" . $this->getidproduct() . ".jpg";
 
 		} else {
 
@@ -101,10 +115,10 @@ class Product  extends Model
 	public function setPhoto($file)
 	{
 
-		$extention = explode('.', $file['name']);
-		$extention = end($extention);
+		$extension = explode('.', $file['name']);
+		$extension = end($extension);
 
-		switch ($extention){
+		switch ($extension){
 
 			case "jpg":
 			case "jpeg":
@@ -137,7 +151,7 @@ class Product  extends Model
 }
 
 
- ?>
+?>
 
 
 
